@@ -11,7 +11,7 @@ Contoh :
 - BUS ISA ( Industry Standart Architecture )
    Industri computer personal lainnya merespon perkembangan ini dengan mengadopsi standarnya sendiri, bus ISA, yang pada dasarnya adalah bus PC/AT yang beroperasi pada 8,33 MHz. Keuntungannya adalah bahwa pendekatan ini tetap mempertahankan kompatibilitas dengan mesin-mesin dan kartu-kartu yang ada.
 
-## 2. Bia terlalu banyak modul atau perangkat dihubungkan pada bus maka akan terjadi penurunan kinerja, sebutkan penyebabnya?
+## 2. Bila terlalu banyak modul atau perangkat dihubungkan pada bus maka akan terjadi penurunan kinerja, sebutkan penyebabnya?
 Bila terlalu banyak modul atau perangkat dihubungkan pada bus maka akan terjadi penurunan kinerja, yang disebabkan oleh :
 - Semakin besar delay propagasi untuk mengkoordinasikan penggunaan bus. 
 - Antrian penggunaan bus semakin panjang.
@@ -19,11 +19,17 @@ Bila terlalu banyak modul atau perangkat dihubungkan pada bus maka akan terjadi 
 Antisipasi dan solusi persoalan di atas adalah penggunaan bus jamak yang hierarkis. Modul – modul dikalasifikasikan berdasarkan kebutuhan terhadap lebar dan kecepatan bus. Bus biasanya terdiri atas bus lokal, bus sistem, dan bus ekspansi.
 
 ## 3. Umumnya perangkat berprioritas paling rendah memiliki waktu tunggu rata-rata yang paling singkat. Dengan dasar ini biasanya CPU diberi perioritas tertinggi pada SBI. Sebutkan alasan perangkat berprioritas 16 memiliki waktu tunggu rata-rata paling rendah ? Di bawah kondisi Seperti apa keadaan diatas tidak berlaku ?
-Lintasan bagi perpindahan data antar modul. Secara kolektif lintasan tersebut disebut bus data Umumnya jumlah saluran terkait dengan panjang word, misalnya 8, 16, 32 saluran
+Lintasan bagi perpindahan data antar modul. Secara kolektif lintasan tersebut disebut bus data.  Umumnya jumlah saluran terkait dengan panjang word, misalnya 8, 16, 32 saluran. Jalur-jalur data adalah dua arah (bidirectional). CPU dapat membaca dan mengirim data dari/ke memori atau port. Banyak perangkat pada sistem yang dicantolkan ke bus data tapi hanya satu perangkat pada satu saat yang dapat memakainya. Untuk mengatur ini, perangkat harus mempunyai tiga state  (tristate) agar dapat dipasang pada bus data.
+
+Secara umum, perangkat dengan prioritas rendah memiliki waktu tunggu rata-rata yang lebih rendah dibandingkan dengan yang lainnya karena pendekatan antrian yang dilakukan oleh SBI (Sistem Berbasis Interrupt). Dalam SBI, perangkat atau proses dengan prioritas lebih tinggi diberikan 'hak' pertama untuk memproses kerjaan, sementara perangkat atau proses dengan prioritas yang lebih rendah harus menunggu. Kondisi ini tidak berlaku apabila terjadi overrun buffer, yaitu ketika data masuk melebihi kapasitas buffer dan tidak dapat diproses oleh perangkat, yang mengakibatkan delay waktu tanggap dan meningkatkan waktu tunggu rata-rata.
+
+Proses-peroses dalam sistem berbasis interrupt (SBI) dilayani berdasarkan prioritas. Tugas atau perangkat dengan prioritas tertinggi akan mendapat waktu CPU terlebih dahulu dibandingkan yang lain. Alasannya adalah agar CPU dapat merespons dan menyelesaikan interrupt secepat mungkin, hal ini memberikan insentif bagi prioritas interrupt yang lebih tinggi. Oleh karenanya umumnya perangkat berprioritas paling rendah memiliki waktu tunggu rata-rata yang paling pendek.
+
+Namun pada kondisi bahaya yang dikenal gleap atau overrun buffer (yaitu ketika data masuk terlalu cepat dan buffer tidak memadai untuk menyimpannya), perangkat bisa mengalami tardiness, dengan kata lain waktu tanggap penyelesaian dari proses tersebut menjadi terlambat dan waktu tunggu rata-rata pun meningkat. Hal ini akan mengganggu prioritas dasar SBI yang seharusnya semenjak awal dimiliki oleh proses dengan prioritas
 
 
 ### sumber dan referensi
 - https://tecnomasi.blogspot.com/2015/12/jawaban-organisasi-arsitektur-komputer.html
 - https://123dok.com/document/zg65782q-bab-sistem-bus-organisasi-komputer.html#:~:text=Bila%20terlalu%20banyak%20modul%20atau%20perangkat%20dihubungkan%20pada,penggunaan%20bus.%20%E2%80%A2%20Antrian%20penggunaan%20bus%20semakin%20panjang.
-- 
+- https://www.questionai.com/questions-sz1AD1Tn3j/content-3-umumnya-perangkat-berprioritas-paling-rendah
 
